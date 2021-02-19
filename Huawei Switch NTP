@@ -1,0 +1,15 @@
+## Huawei Switch NTP
+
+## Master Server
+[SwitchA] ntp-service refclock-master 2
+[SwitchA] ntp-service authentication enable
+[SwitchA] ntp-service authentication-keyid 42 authentication-mode hmac-sha256 cipher Hello123
+[SwitchA] ntp-service reliable authentication-keyid 42
+undo ntp-service server disable
+
+## Client
+<SwitchB> clock imezone Beijing add 8
+[SwitchB] ntp-service authentication enable
+[SwitchB] ntp-service authentication-keyid 42 authentication-mode hmac-sha256 cipher Hello123
+[SwitchB] ntp-service reliable authentication-keyid 42
+[SwitchB] ntp-service unicast-server 10.1.1.1 authentication-keyid 42
